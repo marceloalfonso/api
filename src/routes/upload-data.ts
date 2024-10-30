@@ -6,7 +6,7 @@ import { mysql } from '../lib/mysql';
 const parsedReadingsSchema = z.record(z.number());
 
 export default async function uploadData(app: FastifyInstance) {
-  app.withTypeProvider<ZodTypeProvider>().post(
+  app.withTypeProvider<ZodTypeProvider>().get(
     '/data/upload',
     {
       schema: {
