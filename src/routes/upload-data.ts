@@ -7,17 +7,17 @@ const parsedReadingsSchema = z.record(z.number());
 
 export default async function uploadData(app: FastifyInstance) {
   app.withTypeProvider<ZodTypeProvider>().post(
-    '/data',
+    '/data/upload',
     {
       schema: {
-        body: z.object({
+        querystring: z.object({
           sensorId: z.number(),
           readings: z.string(),
         }),
       },
     },
     (request, reply) => {
-      const { sensorId, readings } = request.body;
+      const { sensorId, readings } = request.query;
 
       mysql.getConnection((databaseError, databaseConnection) => {
         if (databaseError) {
