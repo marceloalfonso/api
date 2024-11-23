@@ -12,7 +12,7 @@ export default async function getNotifications(app: FastifyInstance) {
         }
 
         databaseConnection.query(
-          'SELECT * FROM notifications',
+          'SELECT * FROM notifications ORDER BY id DESC LIMIT 10',
           (queryError, notifications) => {
             databaseConnection.release();
 
